@@ -17,7 +17,8 @@ export default new Router({
       name:'home',
       component: Home,
       children:[
-        {path:'/user',name:'user',component:(resolve)=>require(['../components/User.vue'],resolve)}
+        {path:'/user',name:'user',component:(resolve)=>require(['../components/User.vue'],resolve)},
+        {path:'/cmd',name:'command',component:(resolve)=>require(['../components/Command.vue'],resolve)}
       ]
     },{
     	path:'/index',

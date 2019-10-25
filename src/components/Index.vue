@@ -11,7 +11,7 @@
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>角色管理</el-dropdown-item>
-          <el-dropdown-item>报错列表</el-dropdown-item>
+          <el-dropdown-item><router-link to='/cmd'>报错列表</router-link></el-dropdown-item>
           <el-dropdown-item><router-link to='/user'>用户管理</router-link></el-dropdown-item>
           <el-dropdown-item><router-link to='/config'>基础数据</router-link></el-dropdown-item>
           <el-dropdown-item divided>修改密码</el-dropdown-item>
@@ -98,14 +98,12 @@ export default {
       return data.label.indexOf(value)!==-1
     },
     handleNodeClick(data) {
-      console.log(data.label);
       this.$router.push(data.url)
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .el-header, .el-footer {
     background-color: #B3C0D1;

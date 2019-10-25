@@ -100,11 +100,9 @@ import echarts from "echarts";
 		},
 		methods:{
 			formatter(row,column){
-				console.log(row + ' - ' + column)
 				return row.address
 			},
 			handleChange(val){
-				console.log(val)
 			},
 			drawPie(id){
 				this.charts = echarts.init(document.getElementById(id))

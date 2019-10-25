@@ -10,9 +10,6 @@ const axiosInstance = axios.create({
 
 //（添加请求拦截器）
 axiosInstance.interceptors.request.use((config)=>{
-	// if(config.method === 'post'){
-	// 	config.data = qs.stringify(config.data)
-	// }
 	return config
 },(error)=>{
 	console.log('错误的传参')

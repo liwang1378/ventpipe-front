@@ -117,9 +117,10 @@ import {get,post} from '@/router/axios-cfg'
 		  	this.$message('刷新成功')
 		  	this.query()
 		  },
-		  query(){
-		  	get('/user/query').then(res=>{
+		  async query(){
+		  	await get('/user/query').then(res=>{
 		  		let arr = res.data
+		  		// console.log(this.tableData)
 		  		this.tableData = res.data
 		  		for(let i=0;i<arr.length;i++){
 		  			this.tableData[i].telephone = arr[i].customer.telephone

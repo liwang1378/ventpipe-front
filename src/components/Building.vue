@@ -118,7 +118,6 @@
 		},
 		methods:{
 			handleChange(val) {
-		        console.log(val);
 		      }
 		}
 	}
