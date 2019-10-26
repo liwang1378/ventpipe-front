@@ -41,10 +41,14 @@
 		        label="操作" width="400">
 		        <template slot-scope="scope">
 		               <el-button @click="handleUpdate(scope.row)" type="primary" size="small">修改</el-button>
-		               <el-button :type="scope.row.activeflag==1?'danger':'success'" size="small" @click="handleEnable(scope.row)">{{scope.row.activeflag==1?'禁用':'启用'}}</el-button>
+		               <span v-if="flag">
+		               	<el-button :type="scope.row.activeflag==1?'danger':'success'" size="small" @click="handleEnable(scope.row)">{{scope.row.activeflag==1?'禁用':'启用'}}</el-button>
+		               </span>
 		                <el-button @click="handleDelete(scope.row)" type="danger" size="small">删除</el-button>
-		               <el-button type="success" size="small" @click="handleEnter(scope.row)">进入系统</el-button>
-		                <el-button @click="handleClick(scope.row)" type="warning" size="small">导入</el-button>
+		               <span v-if="flag">
+			               <el-button type="success" size="small" @click="handleEnter(scope.row)">进入系统</el-button>
+			                <el-button @click="handleClick(scope.row)" type="warning" size="small">导入</el-button>
+		                </span>
 		             </template>
 		      </el-table-column>
 		    </el-table>
@@ -84,6 +88,7 @@ import {get,post} from '@/router/axios-cfg'
 	export default{
 		data(){
 			return {
+				flag:true,
 				userUI:false,
 				form:{
 					username : '',
@@ -108,6 +113,10 @@ import {get,post} from '@/router/axios-cfg'
 		},
 		created(){
 			this.query()
+			let flag = this.$route.path
+			if(flag == "/user"){
+				this.flag = false
+			}
 		},
 		methods:{
 		  fmtActive(row,column,cellValue,index){

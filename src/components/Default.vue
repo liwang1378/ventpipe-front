@@ -10,6 +10,10 @@
           系统设置<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item><router-link to='/role'>角色管理</router-link></el-dropdown-item>
+          <el-dropdown-item><router-link to='/cmd'>报错列表</router-link></el-dropdown-item>
+          <el-dropdown-item><router-link to='/user'>用户管理</router-link></el-dropdown-item>
+          <el-dropdown-item><router-link to='/config'>基础数据</router-link></el-dropdown-item>
           <el-dropdown-item divided><router-link to='/password'>修改密码</router-link></el-dropdown-item>
           <el-dropdown-item divided><router-link to='/'>退出登录</router-link></el-dropdown-item>
         </el-dropdown-menu>

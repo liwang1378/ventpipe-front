@@ -7,7 +7,6 @@
 		  		<el-table-column prop="name" label="姓名" sortable></el-table-column>
 		  		<el-table-column prop="address" label="地址" width="280" :formatter="formatter"></el-table-column>
 		  		<el-table-column prop="detail" label="操作" width="80"></el-table-column>
-		  		
 		  	</el-table>
 		  </div></el-col>
 		  <!-- <el-col :span="1"></el-col> -->

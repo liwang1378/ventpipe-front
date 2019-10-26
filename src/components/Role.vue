@@ -1,0 +1,119 @@
+<template>
+	<el-row>
+	  <el-col :span="12">
+	  <div class="grid-content">
+		<span style="text-align:center;font-size:24px;">角色管理</span>
+		<div style="float:right;margin-bottom:10px">
+  			<el-button type="primary"  size="small" @click="fresh()">刷新</el-button>
+  			<el-button type="primary"  size="small" @click="roleUI=true">添加角色</el-button>
+  		</div>
+	  	<el-table :data="tableData" style="width:100%" :default-sort="{prop:'roleid',order:'descending'}">
+	  		<el-table-column prop="roleid" label="编号" sortable ></el-table-column>
+	  		<el-table-column prop="rolename" label="角色名称" sortable></el-table-column>
+	  		<el-table-column
+		      label="操作" width="400">
+		      <template slot-scope="scope">
+		          <el-button @click="handleUpdate(scope.row)" type="primary" size="small">修改</el-button>
+		          <el-button @click="handlePerm(scope.row)" type="primary" size="small">权限</el-button>
+		          <el-button @click="handleDelete(scope.row)" type="danger" size="small">删除</el-button>
+		      </template>
+		    </el-table-column>
+	  	</el-table>
+	  </div></el-col>
+	  <el-col :span="12">
+		  <div class="grid-content" style="margin-left:10px;padding:0px;background-color: #fcf8e3;">
+		  	
+		  </div>
+	  </el-col>
+	  <el-dialog title="添加角色" :visible.sync="roleUI">
+	  	<el-form :model="roleForm" :rules="roleRules" ref="roleForm">
+	  		<el-input v-model="roleForm.roleid" type="hidden"></el-input>
+	  		<el-form-item label="角色名称" :label-width="formLabelWidth" prop="rolename">
+	  			<el-input v-model="roleForm.rolename" autocomplete="off"></el-input>
+	  		</el-form-item>
+	  	</el-form>
+	  	<div class="dialog-footer" slot="footer">
+	  		<el-button @click="roleUI=false">取消</el-button>
+	  		<el-button type="primary" @click="submitRoleForm('roleForm')">确定</el-button>
+	  	</div>
+	  </el-dialog>
+	</el-row>
+</template>
+
+<script>
+import {get,post} from '@/router/axios-cfg'
+	export default{
+		data(){
+			return{
+				roleRules:{
+					rolename: [{ required: true, message: '请填写角色名称', trigger: 'change' }]
+				},
+				roleUI:false,
+				tableData:[],
+				roleForm:{
+					rolename:''
+				},
+				formLabelWidth:'120px',
+			}
+		},
+		created(){
+			this.fresh()
+		},
+		methods:{
+			async fresh(){
+				await get('/role/query').then(res=>{
+						this.tableData = res.data
+					})
+			},
+			handleUpdate(row){
+				this.roleUI = true
+				this.roleForm.roleid = row.roleid
+				this.roleForm.rolename = row.rolename
+			},
+			handleDelete(row){
+				this.$confirm('确定删除 '+row.rolename+'吗?','提示',{
+			    	confirmButtonText:'确定',
+			    	cancelButtonText:'取消',
+			    	type:'warning'
+			    }).then(()=>{
+			    	get('/role/delete/'+row.roleid).then(()=>{
+			    		this.$message('删除成功！')
+			    		this.fresh()
+		    		})
+			    }).catch((err)=>{
+			    	console.log(err)
+			    })
+			},
+			submitRoleForm(formName){
+				let param = (this.roleForm)
+				param.customerid = '008'
+				this.$refs[formName].validate((valid)=>{
+			  		if(valid){
+						post('/role/save',JSON.stringify(param)).then((res)=>{
+		  				this.$message({
+  				          message: '操作成功！',
+  				          type: 'success'
+  				        });
+		  			})
+		  			this.roleUI=false
+		  			this.$refs[formName].resetFields();
+			  		}else{
+						this.$message.error('错了哦');
+			  			return false
+			  		}
+			  		this.fresh()
+				})
+			},
+			handlePerm(row){
+				
+			}
+		}
+	}
+</script>
+
+<style scoped>
+  .grid-content {
+    border-radius: 4px;
+    min-height: 360px;
+  }
+</style>
