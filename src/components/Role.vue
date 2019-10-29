@@ -21,8 +21,20 @@
 	  	</el-table>
 	  </div></el-col>
 	  <el-col :span="12">
-		  <div class="grid-content" style="margin-left:10px;padding:0px;background-color: #fcf8e3;">
-		  	
+		  <div class="grid-content" style="margin-left:10px;padding:0px;background-color: #fcf8e3;" v-if="flag">
+		  	<el-tree
+		  	  :data="roleTreeData"
+		  	  show-checkbox
+		  	  default-expand-all
+		  	  node-key="uuid"
+		  	  ref="tree"
+		  	  highlight-current
+		  	  :props="defaultProps">
+		  	</el-tree>
+		  	<div style="margin:10px auto;">
+			  	<el-button type="primary" @click="save">确定</el-button>
+	  			<el-button type="info" @click="cancel">取消</el-button>
+	  		</div>
 		  </div>
 	  </el-col>
 	  <el-dialog title="添加角色" :visible.sync="roleUI">
@@ -45,6 +57,14 @@ import {get,post} from '@/router/axios-cfg'
 	export default{
 		data(){
 			return{
+				roleid:'',
+				flag:false,
+				roleTreeData:[],
+				defaultProps: {
+		         children: 'children',
+		         label: 'name',
+		         uuid:'uuid'
+		        },
 				roleRules:{
 					rolename: [{ required: true, message: '请填写角色名称', trigger: 'change' }]
 				},
@@ -60,10 +80,35 @@ import {get,post} from '@/router/axios-cfg'
 			this.fresh()
 		},
 		methods:{
+			save(){
+				console.log(this.$refs.tree.getCheckedNodes());
+				let checkedArr = this.$refs.tree.getCheckedNodes()
+				let param = []
+				for(var i=0;i<checkedArr.length;i++){
+					let item = {roleid:this.roleid,uuid:checkedArr[i].uuid}
+					param.push(item)
+				}
+				post('/rp/save',JSON.stringify(param)).then(res=>{
+					if(res.success){
+						this.$message('操作成功！')
+						this.flag= false
+					}else{
+						this.$message.error('错了哦')
+					}
+				})
+			},
+			cancel(){
+				this.roleTreeData = []
+				this.flag = false
+			},
 			async fresh(){
 				await get('/role/query').then(res=>{
 						this.tableData = res.data
 					})
+				let customerid = 9
+				await get('/building/treeList/'+customerid).then(res=>{
+					this.roleTreeData = res.data
+				})
 			},
 			handleUpdate(row){
 				this.roleUI = true
@@ -105,7 +150,19 @@ import {get,post} from '@/router/axios-cfg'
 				})
 			},
 			handlePerm(row){
-				
+				// console.log(row)
+				this.flag = true
+				this.fresh()
+				this.roleid = row.roleid
+				let item = []
+				get('/rp/queryByRoleid/'+row.roleid).then(res=>{
+					// this.roleTreeData = res.data
+					let arr = res.data
+					for(var i=0;i<arr.length;i++){
+						item.push(arr[i].uuid)
+					}
+					this.$refs.tree.setCheckedKeys(item);
+				})
 			}
 		}
 	}
