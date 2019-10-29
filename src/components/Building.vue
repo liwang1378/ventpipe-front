@@ -7,14 +7,14 @@
 		  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
 		</el-breadcrumb>
 		<el-card class="box-card" style="margin-top:10px;">
-		  <div slot="header" class="clearfix" style="background-color:#ccc">
+		  <div slot="header" class="clearfix">
 		    <span>一号楼</span>
-		    <el-button style="float: right; padding: 6px " type="primary">关闭</el-button>
+		    <el-button style="padding: 5px " type="primary">关闭</el-button>
 		  </div>
 		  <el-card class="box-card" style="margin-top:10px;">
-		  	<div slot="header" class="clearfix" style="background-color:#eee">
+		  	<div slot="header" class="clearfix">
 			    <span>一号新风系统</span>
-			    <el-button style="float: right; padding: 6px " type="primary">关闭</el-button>
+			    <el-button style="padding: 5px " type="primary">关闭</el-button>
 		  	</div>
 		  	<div>
 		  		<el-row type="flex" class="row-bg">
@@ -58,10 +58,10 @@
 		  		</el-row>
 		  	</div>
 		  </el-card>
-		   <el-card class="box-card" style="margin-top:10px;">
-		  	<div slot="header" class="clearfix" style="background-color:#eee">
+		   <el-card class="box-card" style="margin-top:10px;background-color:pink">
+		  	<div slot="header" class="clearfix">
 			    <span>101</span>
-			    <el-button style="float: right; padding: 6px " type="primary">关闭</el-button>
+			    <el-button style="padding: 5px " type="primary">关闭</el-button>
 		  	</div>
 		  	<div>
 		  		<el-row type="flex" class="row-bg">
@@ -110,11 +110,20 @@
 </template>
 
 <script>
+import {get,post} from '@/router/axios-cfg'
 	export default{
 		data(){
 			return {
+				breadcrumb:[],
 				activeNames: ['1']
 			}
+		},
+		created(){
+			let uuid = 24
+			get('/building/createNavigator/'+uuid).then(res=>{
+				console.log(res)
+				this.breadcrumb = res.data
+			})
 		},
 		methods:{
 			handleChange(val) {

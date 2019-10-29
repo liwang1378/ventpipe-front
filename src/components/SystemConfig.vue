@@ -330,6 +330,7 @@ import {get,post} from '@/router/axios-cfg'
 		  			})
 		  			this.buildUI=false
 		  			this.$refs[formName].resetFields();
+		  			this.buildForm = {}
 			  		}else{
 						this.$message.error('错了哦');
 			  			return false
@@ -430,6 +431,8 @@ import {get,post} from '@/router/axios-cfg'
 						})
 						this.pipeUI=false
 						this.deviceUI=false
+						this.pipeForm = {}
+						this.deviceForm = {}
 						this.$refs[formName].resetFields();
 					}else{
 						this.$message.error('错了哦')

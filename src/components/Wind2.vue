@@ -1,0 +1,148 @@
+<template>
+	<div>
+	<el-card class="box-card">
+	  <div slot="header" class="clearfix">
+	    <span>一号排风系统</span>
+	    <el-button style="padding: 5px" type="danger">关闭</el-button>
+	  </div>
+  	  <div>
+  		<el-row type="flex" class="row-bg">
+  		  <el-col><div class="grid-content bg-purple">管道静压控制器</div></el-col>
+  		</el-row>
+  		<el-row type="flex" class="row-bg">
+  		  <el-col :span="6"><div class="grid-content bg-purple">设备编号</div></el-col>
+	      <el-col :span="6"><div class="grid-content bg-purple-light">004</div></el-col>
+	      <el-col :span="6"><div class="grid-content bg-purple">连接状态</div></el-col>
+	      <el-col :span="6"><div class="grid-content bg-purple">未连接</div></el-col>
+  		</el-row>
+  		<el-row type="flex" class="row-bg">
+  		  <el-col :span="6"><div class="grid-content bg-purple">管道1设定压差</div></el-col>
+	      <el-col :span="6"><div class="grid-content bg-purple-light">004</div></el-col>
+	      <el-col :span="6"><div class="grid-content bg-purple">连接状态</div></el-col>
+	      <el-col :span="6"><div class="grid-content bg-purple">未连接</div></el-col>
+  		</el-row>
+  		<el-row type="flex" class="row-bg">
+  		  <el-col :span="6"><div class="grid-content bg-purple">管道1当前压差</div></el-col>
+	      <el-col :span="6"><div class="grid-content bg-purple-light">004</div></el-col>
+	      <el-col :span="6"><div class="grid-content bg-purple">连接状态</div></el-col>
+	      <el-col :span="6"><div class="grid-content bg-purple">未连接</div></el-col>
+  		</el-row>
+  		
+  		<el-row type="flex" class="row-bg">
+  		  <el-col :span="4"><div class="grid-content bg-purple">
+  		  	<el-button type="primary">一键升压1</el-button>
+  		  </div></el-col>
+	      <el-col :span="4"><div class="grid-content bg-purple-light">
+	      	<el-button type="info">关机1</el-button>
+	      </div></el-col>
+	      <el-col :span="4"><div class="grid-content bg-purple">
+	      	<el-button type="warning">一键升压2</el-button>
+	      </div></el-col>
+	      <el-col :span="4"><div class="grid-content bg-purple">
+	      	<el-button type="danger">关机2</el-button>
+	      </div></el-col>
+	      <el-col :span="4"><div class="grid-content bg-purple">
+	      	<el-button type="success">参数设置</el-button>
+	      </div></el-col>
+  		</el-row>
+  	</div>
+  	<!--房间-->
+    <el-card class="box-card" style="margin-top:10px;background-color:pink">
+  	<div slot="header" class="clearfix" >
+	    <span>101</span>
+	    <el-button style="padding: 5px " type="danger">关闭</el-button>
+  	</div>
+  	<div>
+  		<el-row type="flex" class="row-bg">
+  		  <el-col><div class="grid-content bg-purple">一号通风柜</div></el-col>
+  		</el-row>
+  		<el-row type="flex" class="row-bg">
+  		  <el-col :span="6"><div class="grid-content bg-purple">设备编号</div></el-col>
+		      <el-col :span="6"><div class="grid-content bg-purple-light">004</div></el-col>
+		      <el-col :span="6"><div class="grid-content bg-purple">连接状态</div></el-col>
+		      <el-col :span="6"><div class="grid-content bg-purple">未连接</div></el-col>
+  		</el-row>
+  		<el-row type="flex" class="row-bg">
+  		  <el-col :span="6"><div class="grid-content bg-purple">常规风速</div></el-col>
+		      <el-col :span="6"><div class="grid-content bg-purple-light">045m/s</div></el-col>
+		      <el-col :span="6"><div class="grid-content bg-purple">节能风速</div></el-col>
+		      <el-col :span="6"><div class="grid-content bg-purple">0.29m/s</div></el-col>
+  		</el-row>
+  		<el-row type="flex" class="row-bg">
+  		  <el-col :span="6"><div class="grid-content bg-purple">风速模式</div></el-col>
+		      <el-col :span="6"><div class="grid-content bg-purple-light">节能</div></el-col>
+		      <el-col :span="6"><div class="grid-content bg-purple">当前风速</div></el-col>
+		      <el-col :span="6"><div class="grid-content bg-purple">0m/s</div></el-col>
+  		</el-row>
+  		
+  		<el-row type="flex" class="row-bg">
+  		  <el-col :span="4"><div class="grid-content bg-purple">
+  		  	<el-button type="primary">一键排风</el-button>
+  		  </div></el-col>
+		      <el-col :span="4"><div class="grid-content bg-purple-light">
+		      	<el-button type="danger">关机</el-button>
+		      </div></el-col>
+		      <el-col :span="4"><div class="grid-content bg-purple">
+		      	<el-button type="info">参数设置</el-button>
+		      </div></el-col>
+  		</el-row>
+  	</div>
+  	</el-card>
+	</el-card>
+	</div>
+</template>
+
+<script>
+	export default{
+		data(){
+			return {
+
+			}
+		}
+	}
+</script>
+
+<style scoped>
+  .text {
+    font-size: 14px;
+  }
+
+  .item {
+    margin-bottom: 18px;
+  }
+  
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+    
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .el-row {
+    margin-bottom: 5px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  /*.bg-purple-dark {
+    background: #99a9bf;
+  }
+  
+  .bg-purple-light {
+    background: #e5e9f2;
+  }*/
+  .grid-content {
+    border-radius: 4px;
+    /*min-height: 36px;*/
+  }
+  .row-bg {
+    padding: 10px 0;
+    /*background-color: #f9fafc;*/
+  }
+</style>

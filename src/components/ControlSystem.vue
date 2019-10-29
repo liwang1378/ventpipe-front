@@ -9,21 +9,19 @@
 		  		<el-table-column prop="detail" label="操作" width="80"></el-table-column>
 		  	</el-table>
 		  </div></el-col>
-		  <!-- <el-col :span="1"></el-col> -->
 		  <el-col :span="12"><div class="grid-content bg-purple-light" style="margin-left:10px;padding:0px;background-color: #fcf8e3;">
 		  	<el-collapse v-model="activeNames" @change="handleChange" style="background-color: #fcf8e3;">
 		  		<el-collapse-item  name="1" >
 		  		<template slot="title">
 		  			<span style="color:blue;">设备运行状况</span>&nbsp;<i class="header-icon el-icon-info"></i>
 		  		</template>
-		  		<!--echarts容器-->
 		  			<div id="main" style="width:100%;height:400px;"></div>
 		  		</el-collapse-item>
 		  		<el-collapse-item title="总系统状态" name="2">
 		  			<div>
-		  				<el-tag effect="dark" type="info" key="">总控制器 - 15</el-tag>
-		  				<el-tag effect="dark" type="success" key="">正常系统 - 12</el-tag>
-		  				<el-tag effect="dark" type="danger" key="">故障系统 - 3</el-tag>
+		  				<el-tag effect="dark" type="info" key="total">总控制器 - 15</el-tag>
+		  				<el-tag effect="dark" type="success" key="success">正常系统 - 12</el-tag>
+		  				<el-tag effect="dark" type="danger" key="error">故障系统 - 3</el-tag>
 		  			</div>
 		  			
 		  		</el-collapse-item>
@@ -152,15 +150,15 @@ import echarts from "echarts";
 	      margin-bottom: 0;
 	    }
 	  }
-	  .el-col {
-	    border-radius: 4px;
-	  }
-	  .bg-purple-dark {
-	    background: #99a9bf;
-	  }
-	  .bg-purple {
-	      background: #d3dce6;
-	    }
+    .el-col {
+    	border-radius: 4px;
+    }
+    .bg-purple-dark {
+    	background: #99a9bf;
+    }
+    .bg-purple {
+      background: #d3dce6;
+    }
     .bg-purple-light {
       background: #e5e9f2;
     }
