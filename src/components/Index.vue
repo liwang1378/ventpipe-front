@@ -246,8 +246,8 @@ export default {
       this.$refs.tree.filter(val)
     },
     $route(now,old){//watch监测路由变化
-      console.log(now)
-      console.log(old)
+      // console.log(now)
+      // console.log(old)
     }
   },
   name: 'index',
@@ -418,7 +418,6 @@ export default {
       get('/building/treeList/'+customerid).then(res=>{
         this.treeData = res.data
       })
-      
     },
     submitForm(formName){
         // let param = (this.form)

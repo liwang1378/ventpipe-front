@@ -57,6 +57,7 @@ import {get,post} from '@/router/axios-cfg'
 	export default{
 		data(){
 			return{
+				user:{},
 				roleid:'',
 				flag:false,
 				roleTreeData:[],
@@ -77,7 +78,10 @@ import {get,post} from '@/router/axios-cfg'
 			}
 		},
 		created(){
-			this.fresh()
+			get('/current').then(res=>{
+			      this.user = res.data
+			      this.fresh()
+    		})
 		},
 		methods:{
 			save(){
@@ -104,7 +108,7 @@ import {get,post} from '@/router/axios-cfg'
 				await get('/role/query').then(res=>{
 						this.tableData = res.data
 					})
-				let customerid = 9
+				let customerid = this.user.customer.customerid
 				await get('/building/treeList/'+customerid).then(res=>{
 					this.roleTreeData = res.data
 				})
