@@ -12,7 +12,8 @@ export default new Router({
     {
       path: '/',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {title:'智能通风控制系统',keyword:'智能',description:'作者:李旺'},
     },{//登录后初始页
       path:'/home',
       name:'home',

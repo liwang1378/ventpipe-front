@@ -13,6 +13,15 @@ Vue.prototype.qs = QS
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
+router.beforeEach((to,from,next)=>{
+	let title = ''
+	if(to.meta!=null && to.meta.title){
+		title = to.meta.title
+	}
+	document.title = '智能通风控制系统'
+	next()
+})
+
 /* eslint-disable no-new */
 /* eslint-disable */
 new Vue({

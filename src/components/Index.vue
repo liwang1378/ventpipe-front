@@ -244,6 +244,10 @@ export default {
   watch: {
     filterText(val){
       this.$refs.tree.filter(val)
+    },
+    $route(now,old){//watch监测路由变化
+      console.log(now)
+      console.log(old)
     }
   },
   name: 'index',
@@ -581,8 +585,8 @@ export default {
   created(){
     get('/current').then(res=>{
       this.user = res.data
+      this.query()
     })
-    this.query()
   }
 }
 </script>
