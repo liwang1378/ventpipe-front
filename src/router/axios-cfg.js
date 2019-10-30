@@ -1,10 +1,13 @@
 import axios from 'axios'
 import qs from 'qs'
 import sf from 'string-format'
+import router from '../router'
+import {Loading, Message} from 'element-ui'
 
 const axiosInstance = axios.create({
 	baseURL: 'http://127.0.0.1:8085/',
 	timeout: 3000,
+	withCredentials:true,
 	headers: {'Access-Control-Allow-Origin':'*','Content-Type': 'application/json'}
 })
 
@@ -12,6 +15,14 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use((config)=>{
 	return config
 },(error)=>{
+	Message.error({
+	    message: '错误的传参',
+	    onClose: function () {
+	      let flag = router.currentRoute.path
+	      if(flag !='/')
+	      	router.push('/');
+	    }
+	})
 	console.log('错误的传参')
 	return Promise.reject(error)
 })
@@ -19,9 +30,27 @@ axiosInstance.interceptors.request.use((config)=>{
 axiosInstance.interceptors.response.use((res)=>{
 	if(res.data.success){
 		return Promise.resolve(res.data)
+	}else{
+		Message.error({
+		    message: '亲，错了哦',
+		    onClose: function () {
+		      let flag = router.currentRoute.path
+	          if(flag !='/')
+		      	router.push({name: 'Login'});
+		    }
+		  })
+		return Promise.resolve(res.data)
 	}
-	return res.data
+	
 },(error)=>{
+	Message.error({
+	    message: '网络异常',
+	    onClose: function () {
+	      let flag = router.currentRoute.path
+	      if(flag !='/')
+	      	router.push({name: 'Login'});
+	    }
+	})
 	console.log('网络异常')
 	return Promise.reject(error)
 })

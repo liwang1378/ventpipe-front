@@ -33,6 +33,7 @@ import {get,post} from '@/router/axios-cfg'
 		        }
 		      }
 			return{
+				user:{},
 				form:{
 					password:'',
 					password1:'',
@@ -75,7 +76,11 @@ import {get,post} from '@/router/axios-cfg'
 		},
 		created(){
 			//获取当前用户的userid
-			this.form.userid=4
+			get('/current').then(res=>{
+			  this.user = res.data
+			  this.form.userid= res.data.userid
+			})
+			
 		}
 	}
 </script>

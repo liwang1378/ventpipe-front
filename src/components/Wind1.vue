@@ -1,6 +1,10 @@
 <template>
 	<div>
-	<el-card class="box-card">
+  <el-breadcrumb separator-class="el-icon-arrow-right" >
+      <el-breadcrumb-item :to="{ path: '/cs' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item v-for="(item,index) in breadcrumb" :key="index">{{item.name}}</el-breadcrumb-item>
+  </el-breadcrumb>
+	<el-card class="box-card" style="margin-top:10px;">
 	  <div slot="header" class="clearfix">
 	    <span>一号新风系统</span>
 	    <el-button style="padding: 5px" type="danger">关闭</el-button>
@@ -99,12 +103,19 @@
 </template>
 
 <script>
+import {get,post} from '@/router/axios-cfg'
 	export default{
 		data(){
 			return {
-
+        breadcrumb:[]
 			}
-		}
+		},
+    created(){
+      let uuid = this.$route.query.uuid
+      get('/building/createNavigator/'+uuid).then(res=>{
+        this.breadcrumb = res.data
+      })
+    }
 	}
 </script>
 
@@ -136,19 +147,10 @@
   .el-col {
     border-radius: 4px;
   }
-  /*.bg-purple-dark {
-    background: #99a9bf;
-  }
-  
-  .bg-purple-light {
-    background: #e5e9f2;
-  }*/
   .grid-content {
     border-radius: 4px;
-    /*min-height: 36px;*/
   }
   .row-bg {
     padding: 10px 0;
-    /*background-color: #f9fafc;*/
   }
 </style>

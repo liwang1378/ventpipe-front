@@ -53,7 +53,6 @@ import {get,post} from '@/router/axios-cfg'
 				post('/command/query',param).then((res)=>{
 					let arr = res.data
 					let array = arr.dataList
-					console.log('查询记录数 - '+ array.length)
 					for(let i=0;i<array.length;i++){
 						let data = {
 							cmdid : array[i].cmdid, 
@@ -73,16 +72,13 @@ import {get,post} from '@/router/axios-cfg'
 		  		})
 			},
 			handleSizeChange(val) {
-		        console.log(`每页 ${val} 条`);
 		        this.size = val
 		        this.query(this.currentPage,val)
 		    },
 		    handleCurrentChange(val) {
-		        console.log(`当前页: ${val}`);
 		        this.query(val-1,this.size)
 		    },
 			fmtType(row,column,cellValue){
-				// console.log(column)
 		    	//机柜类型(0.通风柜风速控制器 1.房间压差控制器 2.管道静压控制器)
 		    	switch(cellValue){
 		    		case 0:

@@ -4,7 +4,7 @@
       <b style="float:left">
         <i class="el-icon-office-building"></i>&nbsp;智能通风控制系统
       </b>
-      <span><b>智控达管理员,您好！&nbsp;</b></span>
+      <span><b>{{user.username}},您好！&nbsp;</b></span>
       <el-dropdown>
         <span class="el-dropdown-link">
           系统设置<i class="el-icon-arrow-down el-icon--right"></i>
@@ -15,11 +15,10 @@
           <el-dropdown-item><router-link to='/user'>用户管理</router-link></el-dropdown-item>
           <el-dropdown-item><router-link to='/config'>基础数据</router-link></el-dropdown-item>
           <el-dropdown-item divided><router-link to='/password'>修改密码</router-link></el-dropdown-item>
-          <el-dropdown-item divided><router-link to='/'>退出登录</router-link></el-dropdown-item>
+          <el-dropdown-item divided><span @click="logout">退出登录</span></el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <router-link to='/cs'><b><i class="el-icon-s-home">首页</i></b></router-link>
-      <!-- <span><b>&nbsp;首页</b></span> -->
     </el-header>
     <el-container>
       <el-main>
@@ -30,15 +29,27 @@
 </template>
 
 <script>
+import {get,post} from '@/router/axios-cfg'
 export default {
-  
   name: 'home',
   data () {
     return {
-      
+      user:{}
     }
   },
-  
+  created(){
+    get('/current').then(res=>{
+      this.user = res.data
+    })
+  },
+  methods:{
+    logout(){
+      get('/logout').then(res=>{
+        this.$message('退出成功！')
+        this.$router.push('/')
+      })
+    }
+  }
 }
 </script>
 
@@ -55,7 +66,6 @@ export default {
     background-color: #E9EEF3;
     color: #333;
     text-align: center;
-    /*line-height: 160px;*/
   }
   
   body > .el-container {
@@ -72,7 +82,6 @@ export default {
   }
   .el-dropdown-link {
     cursor: pointer;
-    /*color: #409EFF;*/
   }
   .el-icon-arrow-down {
     font-size: 12px;

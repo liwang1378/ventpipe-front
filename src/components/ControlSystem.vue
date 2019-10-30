@@ -28,14 +28,14 @@
 		  		<el-collapse-item title="总系统参数设置" name="3">
 		  			<div>
 		  				<el-row>
-		  				  <el-button type="primary">主要按钮</el-button>
-		  				  <el-button type="success">成功按钮</el-button>
-		  				  <el-button type="info">信息按钮</el-button>
+		  				  <el-button type="primary">新风系统</el-button>
+		  				  <el-button type="success">排风系统</el-button>
+		  				  <el-button type="info">通 风 柜</el-button>
 		  				</el-row>
 		  				<el-row>
-		  				  <el-button type="warning">警告按钮</el-button>
-		  				  <el-button type="danger">危险按钮</el-button>
-		  				  <el-button type="danger">危险按钮</el-button>
+		  				  <el-button type="warning">其   他</el-button>
+		  				  <el-button type="danger">一键停车</el-button>
+		  				  <el-button type="danger">一键启动</el-button>
 		  				</el-row>
 		  			</div>
 		  		</el-collapse-item>
@@ -52,44 +52,51 @@ import echarts from "echarts";
 			return{
 				activeNames: ['1'],
 				tableData: [{
-		          date: '2016-05-02',
-		          name: '王小虎',
-		          address: '上海市普陀区金沙江路 1518 弄',
+		          date: '2018年7月19日 5:30:48 星期一',
+		          name: '设备故障',
+		          address: '一号楼一号新风101-102通风柜',
 		          detail: '详情操作'
-		        }, {
-		          date: '2018年7月19日 5:30:48 星期四',
-		          name: '李小虎',
-		          address: '上海市普陀区金沙江路 1517 弄',
+		        },{
+		          date: '2018年7月29日 14:30:48 星期三',
+		          name: '设备故障',
+		          address: '二号楼一号排风101-102通风柜',
 		          detail: '详情操作'
-		        }, {
-		          date: '2016-05-01',
-		          name: '张小虎',
-		          address: '上海市普陀区金沙江路 1519 弄'
-		        }, {
-		          date: '2016-05-03',
-		          name: '刘小虎',
-		          address: '上海市普陀区金沙江路 1516 弄'
-		        }, {
-		          date: '2011-05-03',
-		          name: '利小虎',
-		          address: '上海市普陀区金沙江路 1516 弄'
-		        }, {
-		          date: '2012-05-03',
-		          name: '沈小虎',
-		          address: '上海市普陀区金沙江路 1516 弄'
-		        }, {
-		          date: '2013-05-03',
-		          name: '杨小虎',
-		          address: '上海市普陀区金沙江路 1516 弄'
-		        }, {
-		          date: '2016-05-03',
-		          name: '付小虎',
-		          address: '上海市普陀区金沙江路 1516 弄'
-		        }, {
-		          date: '2014-05-03',
-		          name: '吴小虎',
-		          address: '上海市普陀区金沙江路 1516 弄'
-		        }],
+		        },{
+		          date: '2018年8月19日 13:30:48 星期四',
+		          name: '设备故障',
+		          address: '一号楼一号排风101-102通风柜',
+		          detail: '详情操作'
+		        },{
+		          date: '2018年9月19日 23:30:48 星期五',
+		          name: '设备故障',
+		          address: '二号楼一号新风101-102通风柜',
+		          detail: '详情操作'
+		        },{
+		          date: '2019年1月19日 20:30:48 星期六',
+		          name: '设备故障',
+		          address: '一号楼二号排风101-102通风柜',
+		          detail: '详情操作'
+		        },{
+		          date: '2019年4月19日 00:30:48 星期二',
+		          name: '设备故障',
+		          address: '一号楼一号排风101-102通风柜',
+		          detail: '详情操作'
+		        },{
+		          date: '2019年5月19日 6:30:48 星期四',
+		          name: '设备故障',
+		          address: '一号楼二号排风101-102通风柜',
+		          detail: '详情操作'
+		        },{
+		          date: '2019年6月19日 05:30:48 星期一',
+		          name: '设备故障',
+		          address: '一号楼二号排风101-102通风柜',
+		          detail: '详情操作'
+		        },{
+		          date: '2019年8月19日 15:30:48 星期四',
+		          name: '设备故障',
+		          address: '一号楼三号排风101-102通风柜',
+		          detail: '详情操作'
+		        }, ],
 		        charts:'',
 		        opinion:['管道静压控制器','房间压差控制器','通风柜'],
 		        opinionData:[{value:5,name:'管道静压控制器'},{value:8,name:'房间压差控制器'},{value:4,name:'通风柜'}]

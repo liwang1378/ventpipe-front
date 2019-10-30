@@ -1,10 +1,8 @@
 <template>
 	<div>
-		<el-breadcrumb separator-class="el-icon-arrow-right">
+		<el-breadcrumb separator-class="el-icon-arrow-right" >
 		  <el-breadcrumb-item :to="{ path: '/cs' }">首页</el-breadcrumb-item>
-		  <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-		  <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-		  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+		  <el-breadcrumb-item v-for="(item,index) in breadcrumb" :key="index">{{item.name}}</el-breadcrumb-item>
 		</el-breadcrumb>
 		<el-card class="box-card" style="margin-top:10px;">
 		  <div slot="header" class="clearfix">
@@ -114,15 +112,18 @@ import {get,post} from '@/router/axios-cfg'
 	export default{
 		data(){
 			return {
+				user:{},
 				breadcrumb:[],
 				activeNames: ['1']
 			}
 		},
 		created(){
-			let uuid = 24
+			let uuid = this.$route.query.uuid
 			get('/building/createNavigator/'+uuid).then(res=>{
-				console.log(res)
 				this.breadcrumb = res.data
+			})
+			get('/current').then(res=>{
+			  this.user = res.data
 			})
 		},
 		methods:{

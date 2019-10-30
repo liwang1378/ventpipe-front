@@ -81,7 +81,6 @@ import {get,post} from '@/router/axios-cfg'
 		},
 		methods:{
 			save(){
-				console.log(this.$refs.tree.getCheckedNodes());
 				let checkedArr = this.$refs.tree.getCheckedNodes()
 				let param = []
 				for(var i=0;i<checkedArr.length;i++){
@@ -150,13 +149,11 @@ import {get,post} from '@/router/axios-cfg'
 				})
 			},
 			handlePerm(row){
-				// console.log(row)
 				this.flag = true
 				this.fresh()
 				this.roleid = row.roleid
 				let item = []
 				get('/rp/queryByRoleid/'+row.roleid).then(res=>{
-					// this.roleTreeData = res.data
 					let arr = res.data
 					for(var i=0;i<arr.length;i++){
 						item.push(arr[i].uuid)

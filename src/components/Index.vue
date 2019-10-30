@@ -4,7 +4,7 @@
       <b style="float:left">
         <i class="el-icon-office-building"></i>&nbsp;智能通风控制系统
       </b>
-      <span><b>智控达管理员,您好！&nbsp;</b></span>
+      <span><b>{{user.username}},您好！&nbsp;</b></span>
       <el-dropdown>
         <span class="el-dropdown-link">
           系统设置<i class="el-icon-arrow-down el-icon--right"></i>
@@ -15,7 +15,7 @@
           <el-dropdown-item><router-link to='/user'>用户管理</router-link></el-dropdown-item>
           <el-dropdown-item><router-link to='/config'>基础数据</router-link></el-dropdown-item>
           <el-dropdown-item divided><router-link to='/password'>修改密码</router-link></el-dropdown-item>
-          <el-dropdown-item divided><router-link to='/'>退出登录</router-link></el-dropdown-item>
+          <el-dropdown-item divided><span @click="logout">退出登录</span></el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <router-link to='/cs'><b><i class="el-icon-s-home">首页</i></b></router-link>
@@ -249,6 +249,7 @@ export default {
   name: 'index',
   data () {
     return {
+      user:{},
       deviceUI:false,
       deviceData:[],
       deviceForm:{
@@ -330,6 +331,12 @@ export default {
     }
   },
   methods:{
+    logout(){
+      get('/logout').then(res=>{
+        this.$message('退出成功！')
+        this.$router.push('/')
+      })
+    },
     handlerType(value){
       this.isSelect = true
       //选择位置下拉框,根据parentuuid,查询所有(新/排风)子节点
@@ -363,8 +370,6 @@ export default {
             let arr = res.data
             for(var i=0;i<arr.length;i++){
               let item = {id:arr[i].houseroomid,name:arr[i].hsname}
-              // this.windData[i].id=arr[i].houseroomid
-              // this.windData[i].name=arr[i].hsname
               this.windData.push(item)
             }
           })
@@ -405,7 +410,7 @@ export default {
         this.buildingData = res.data
       })
       //树形侧边导航栏
-      let customerid = 9
+      let customerid = this.user.customer.customerid
       get('/building/treeList/'+customerid).then(res=>{
         this.treeData = res.data
       })
@@ -416,7 +421,7 @@ export default {
         let param = this.$refs[formName].model
         let params = {}
         let url = ''
-        params.customerid = '009'
+        params.customerid = this.user.customer.customerid
         //楼栋
         if(formName=='form'){
           params.type= 'house'
@@ -536,7 +541,6 @@ export default {
         this.editUI = true
         post(url,JSON.stringify(param)).then(res=>{
           this.editData = res.data
-          // this.currentNode={}
         })
       }
     },
@@ -550,29 +554,34 @@ export default {
       return data.name.indexOf(value)!==-1
     },
     handleNodeClick(data) {
-      let url = ''
+      let name = '',url=''
+      let param = {}
       switch(data.type){
         case 'root':
-          url = '/cs';break
+          url='/cs';name='controlsystem';break
         case 'house':
-          url = '/build';break
+          url='/build';name='building';break
         case 'wind1':
-          url = '/wind1';break
+          url='/wind1';name = '新风';break
         case 'wind2':
-          url = '/wind2';break
+          url='/wind2';name = '排风';break
         case 'room':
-          url = '/room';break
+          url='/room';name = '房间';break
         case 'cup':
-          url = '/device';break
+          url='/device';name = '设备';break
       }
       this.currentNode = data
       let flag = this.$route.path
       if(flag != url){
-        this.$router.push(url)
+        //查询参数,path配对的是query
+        this.$router.push({ path: url , query:{uuid:data.uuid}})
       }
     }
   },
   created(){
+    get('/current').then(res=>{
+      this.user = res.data
+    })
     this.query()
   }
 }

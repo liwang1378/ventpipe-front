@@ -237,6 +237,7 @@ import {get,post} from '@/router/axios-cfg'
 	export default{
 		data(){
 			return{
+				user:{},
 				deviceUI:false,
 				deviceForm:{
 					type:'',
@@ -258,7 +259,8 @@ import {get,post} from '@/router/axios-cfg'
 				formLabelWidth:'120px',
 				buildForm:{
 					hsname:'',
-					address:''
+					address:'',
+					// customerid:this.user.customer.customerid
 				},
 				deviceRules:{
 					type: [{ required: true, message: '请选择设备类型', trigger: 'change' }],
@@ -284,6 +286,11 @@ import {get,post} from '@/router/axios-cfg'
 			this.query(2)
 			this.query(3)
 			this.query(4)
+		    get('/current').then(res=>{
+  				this.user = res.data
+  				console.log(this.user)
+			})
+
 		},
 		methods:{
 			fresh(type){
@@ -319,9 +326,10 @@ import {get,post} from '@/router/axios-cfg'
 			submitBuildForm(formName){
 				let param = (this.buildForm)
 				param.type = 1
-				param.customerid = '007'
+				param.customerid = this.user.customer.customerid
 				this.$refs[formName].validate((valid)=>{
 			  		if(valid){
+			  			console.log(param)
 						post('/hs/save',JSON.stringify(param)).then((res)=>{
 		  				this.$message({
   				          message: '操作成功！',
@@ -390,7 +398,7 @@ import {get,post} from '@/router/axios-cfg'
 			submitRoomForm(formName){
 				let param = (this.roomForm)
 				param.type = 2
-				param.customerid = '001'
+				param.customerid = this.user.customer.customerid
 				this.$refs[formName].validate((valid)=>{
 			  		if(valid){
 						post('/hs/save',JSON.stringify(param)).then((res)=>{
@@ -411,7 +419,10 @@ import {get,post} from '@/router/axios-cfg'
 			},
 			submitForm(formName){
 				let param = this.pipeForm
+				param.customerid = this.user.customer.customerid
 				let deviceParam = this.deviceForm
+				deviceParam.customerid = this.user.customer.customerid
+				deviceParam.status = 0
 				let url = ''
 				let params = {}
 				if(formName == 'pipeForm'){
@@ -421,7 +432,7 @@ import {get,post} from '@/router/axios-cfg'
 					url = '/ac/save'
 					params = JSON.stringify(deviceParam)
 				}
-
+				// params.customerid = this.user.customer.customerid
 				this.$refs[formName].validate((valid)=>{
 					if(valid){
 						post(url,params).then((res)=>{

@@ -1,6 +1,10 @@
 <template>
 	<div>
-		<el-row type="flex" class="row-bg" justify="center">
+		<el-breadcrumb separator-class="el-icon-arrow-right" >
+		    <el-breadcrumb-item :to="{ path: '/cs' }">首页</el-breadcrumb-item>
+		    <el-breadcrumb-item v-for="(item,index) in breadcrumb" :key="index">{{item.name}}</el-breadcrumb-item>
+		</el-breadcrumb>
+		<el-row type="flex" class="row-bg" justify="center" style="margin-top:10px">
 		  <el-col :span="8"><div class="grid-content left">
 		  	<el-row>
 		  	  <el-col :span="12"><div class="grid-content bold">机柜类型</div></el-col>
@@ -92,11 +96,19 @@
 </template>
 
 <script>
+import {get,post} from '@/router/axios-cfg'
 	export default{
 		data(){
 			return {
-				url: require('@/assets/fumehoodsopenvalve.jpg')
+				url: require('@/assets/fumehoodsopenvalve.jpg'),
+				breadcrumb:[]
 			}
+		},
+		created(){
+		  let uuid = this.$route.query.uuid
+		  get('/building/createNavigator/'+uuid).then(res=>{
+		    this.breadcrumb = res.data
+		  })
 		}
 	}
 </script>
