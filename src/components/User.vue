@@ -4,7 +4,7 @@
 		<span style="text-align:center;font-size:24px;">用户管理</span>
 		<div style="float:right;">
 		<el-button type="primary"  size="small" @click="fresh()">刷新</el-button>
-		<el-button type="primary"  size="small" @click="userUI=true">添加新用户</el-button>
+		<el-button type="primary"  size="small" @click="addModal()">添加新用户</el-button>
 		</div>
 		</div>
 		  <el-table
@@ -119,6 +119,10 @@ import {get,post} from '@/router/axios-cfg'
 			}
 		},
 		methods:{
+		  addModal(){
+		  	this.userUI = true
+		  	this.form = {}
+		  },
 		  fmtActive(row,column,cellValue,index){
 		  	return cellValue==1?<el-tag type="success">激活</el-tag>:<el-tag type="danger">禁用</el-tag>
 		  },

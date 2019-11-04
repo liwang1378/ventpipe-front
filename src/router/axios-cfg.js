@@ -6,6 +6,7 @@ import {Loading, Message} from 'element-ui'
 
 const axiosInstance = axios.create({
 	baseURL: 'http://127.0.0.1:8085/',
+	// baseURL:'http://47.96.150.125:8080',
 	timeout: 3000,
 	withCredentials:true,
 	headers: {'Access-Control-Allow-Origin':'*','Content-Type': 'application/json'}

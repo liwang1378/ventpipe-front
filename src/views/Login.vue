@@ -54,6 +54,9 @@ import {get,post} from '@/router/axios-cfg'
 									this.$alert('用户名或密码不正确','提示',{confirmButtonText:'关闭'})
 								}
 							}
+						}).catch(res=>{
+							this.ruleForm2 = {}
+							this.logining = false
 						})
 					}else{
 						console.log('错误提交')

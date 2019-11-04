@@ -8,7 +8,7 @@
 		  			<span style="text-align:center;font-size:24px;">楼栋维护</span>
 		  			<div style="float:right;margin-bottom:10px">
 			  			<el-button type="primary"  size="small" @click="fresh(1)">刷新</el-button>
-			  			<el-button type="primary"  size="small" @click="buildUI=true">添加楼栋</el-button>
+			  			<el-button type="primary"  size="small" @click="openModal(1)">添加楼栋</el-button>
 			  		</div>
 			  			<el-table
 		  			    :data="buildData"
@@ -41,7 +41,7 @@
 		  			<span style="text-align:center;font-size:24px;">房屋维护</span>
 		  			<div style="float:right;margin-bottom:10px">
 			  			<el-button type="primary"  size="small" @click="fresh(2)">刷新</el-button>
-			  			<el-button type="primary"  size="small" @click="roomUI=true">添加房间</el-button>
+			  			<el-button type="primary"  size="small" @click="openModal(2)">添加房间</el-button>
 		  			</div>
 		  			<el-table
 		  			    :data="roomData"
@@ -78,7 +78,7 @@
 			<span style="text-align:center;font-size:24px;">通风系统维护</span>
 			<div style="float:right;margin-bottom:10px">
   			<el-button type="primary"  size="small" @click="fresh(3)">刷新</el-button>
-  			<el-button type="primary"  size="small" @click="pipeUI=true">添加通风系统</el-button>
+  			<el-button type="primary"  size="small" @click="openModal(3)">添加通风系统</el-button>
   		</div>
   			<el-table
 			    :data="pipeData"
@@ -111,7 +111,7 @@
 			<span style="text-align:center;font-size:24px;">设备维护</span>
 			<div style="float:right;margin-bottom:10px">
   			<el-button type="primary"  size="small" @click="fresh(4)">刷新</el-button>
-  			<el-button type="primary"  size="small" @click="deviceUI=true">添加设备</el-button>
+  			<el-button type="primary"  size="small" @click="openModal(4)">添加设备</el-button>
   		</div>
   			<el-table
 			    :data="deviceData"
@@ -263,17 +263,17 @@ import {get,post} from '@/router/axios-cfg'
 					// customerid:this.user.customer.customerid
 				},
 				deviceRules:{
-					type: [{ required: true, message: '请选择设备类型', trigger: 'change' }],
+					type: [{ required: true, message: '请选择设备类型', trigger: 'blur' }],
 					containername:[{required:true,message:'请输入设备名称',trigger:blur}],
 					address:[{required:true,message:'请输入设备编号',trigger:blur}],
 				},
 				pipeRules:{
-					type: [{ required: true, message: '请选择系统类型', trigger: 'change' }],
+					type: [{ required: true, message: '请选择系统类型', trigger: 'blur' }],
 					basename:[{required:true,message:'请输入系统名称',trigger:blur}],
 				},
 				buildRules:{
 					hsname:[{required:true,message:'请输入名称',trigger:blur}],
-					parentid: [{required: true, message: '请选择所属楼栋', trigger: 'change'}],
+					parentid: [{required: true, message: '请选择所属楼栋', trigger: 'blur'}],
 				},
 				pipeData:[],
 				deviceData:[],
@@ -293,6 +293,18 @@ import {get,post} from '@/router/axios-cfg'
 
 		},
 		methods:{
+			openModal(type){
+				switch(type){
+					case 1:
+						this.buildUI = true;this.buildForm = {};break
+					case 2:
+						this.roomUI = true;this.roomForm = {};break
+					case 3:
+						this.pipeUI = true;this.pipeForm = {};break
+					case 4:
+						this.deviceUI = true;this.deviceForm = {};break
+				}
+			},
 			fresh(type){
 				this.query(type)
 			},

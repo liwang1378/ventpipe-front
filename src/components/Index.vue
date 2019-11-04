@@ -485,15 +485,19 @@ export default {
         this.$message.error('请选择添加对象');
       }else if(this.currentNode.type == 'root'){
         this.buildUI = true
+        this.form.customerid = this.user.customer.customerid
       }else if(this.currentNode.type == 'house'){//楼栋
         this.ventUI = true
         this.ventForm.parentuuid = this.currentNode.uuid
+        this.ventForm.customerid = this.user.customer.customerid
       }else if(this.currentNode.type.indexOf('wind') != -1){//新|排风系统
         this.windUI = true
         this.windForm.parentuuid = this.currentNode.uuid
+        this.windForm.customerid = this.user.customer.customerid
       }else if(this.currentNode.type=='room'){
         this.deviceUI = true
         this.deviceForm.parentuuid = this.currentNode.uuid
+        this.deviceForm.customerid = this.user.customer.customerid
       }else{
         this.$message.error('当前设备节点不可添加');
       }

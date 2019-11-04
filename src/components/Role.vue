@@ -5,7 +5,7 @@
 		<span style="text-align:center;font-size:24px;">角色管理</span>
 		<div style="float:right;margin-bottom:10px">
   			<el-button type="primary"  size="small" @click="fresh()">刷新</el-button>
-  			<el-button type="primary"  size="small" @click="roleUI=true">添加角色</el-button>
+  			<el-button type="primary"  size="small" @click="roleModal()">添加角色</el-button>
   		</div>
 	  	<el-table :data="tableData" style="width:100%" :default-sort="{prop:'roleid',order:'descending'}">
 	  		<el-table-column prop="roleid" label="编号" sortable ></el-table-column>
@@ -67,7 +67,7 @@ import {get,post} from '@/router/axios-cfg'
 		         uuid:'uuid'
 		        },
 				roleRules:{
-					rolename: [{ required: true, message: '请填写角色名称', trigger: 'change' }]
+					rolename: [{ required: true, message: '请填写角色名称', trigger: 'blur' }]
 				},
 				roleUI:false,
 				tableData:[],
@@ -84,6 +84,10 @@ import {get,post} from '@/router/axios-cfg'
     		})
 		},
 		methods:{
+			roleModal(){
+				this.roleUI = true
+				this.roleForm = {}
+			},
 			save(){
 				let checkedArr = this.$refs.tree.getCheckedNodes()
 				let param = []
