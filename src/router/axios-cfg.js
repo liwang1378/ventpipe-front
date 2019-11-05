@@ -33,11 +33,13 @@ axiosInstance.interceptors.response.use((res)=>{
 		return Promise.resolve(res.data)
 	}else{
 		Message.error({
-		    message: '亲，错了哦',
+		    message: res.data.msg,
 		    onClose: function () {
 		      let flag = router.currentRoute.path
-	          if(flag !='/')
-		      	router.push({name: 'Login'});
+		      if(res.data.code==5000 || res.data.code==5006){
+		          if(flag !='/')
+			      	router.push({name: 'Login'});
+		  	  }
 		    }
 		  })
 		return Promise.resolve(res.data)

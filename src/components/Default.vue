@@ -53,7 +53,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .el-header, .el-footer {
     background-color: #B3C0D1;

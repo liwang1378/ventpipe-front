@@ -144,19 +144,25 @@ import {get,post} from '@/router/axios-cfg'
 		  },
 		  handleEnter(row){
 		    let id = row.id
+		    let param = {loginname:row.loginname , password:row.password}
 		    let indexPage = this.$router.resolve({ 
-		          name: 'controlsystem',
-		          query:{
-		              // objectType:1,
-		              infoId:id
-		          }   
+		          name: 'controlsystem'
 		    })  
 		    this.$confirm('是否进入新风系统?', '提示', {
 		             confirmButtonText: '确定',
 		             cancelButtonText: '取消',
 		             type: 'warning'
 		           }).then(() => {
-		             window.open(indexPage.href, '_blank');
+		           	 //根据用户跳转主界面
+		           	 post('/login',JSON.stringify(param)).then(res=>{
+		           	 	if(res.success){
+							window.open(indexPage.href, '_blank');
+		           	 	}else{
+							this.$message.error(res.msg);
+		           	 	}
+		           	 })
+
+		             
 		           }).catch(() => {
 		             this.$message({
 		               type: 'info',

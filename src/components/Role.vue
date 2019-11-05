@@ -109,10 +109,10 @@ import {get,post} from '@/router/axios-cfg'
 				this.flag = false
 			},
 			async fresh(){
-				await get('/role/query').then(res=>{
+				let customerid = this.user.customer.customerid
+				await get('/role/query/'+customerid).then(res=>{
 						this.tableData = res.data
 					})
-				let customerid = this.user.customer.customerid
 				await get('/building/treeList/'+customerid).then(res=>{
 					this.roleTreeData = res.data
 				})
@@ -138,7 +138,7 @@ import {get,post} from '@/router/axios-cfg'
 			},
 			submitRoleForm(formName){
 				let param = (this.roleForm)
-				param.customerid = '008'
+				param.customerid = this.user.customer.customerid
 				this.$refs[formName].validate((valid)=>{
 			  		if(valid){
 						post('/role/save',JSON.stringify(param)).then((res)=>{
@@ -147,8 +147,9 @@ import {get,post} from '@/router/axios-cfg'
   				          type: 'success'
   				        });
 		  			})
-		  			this.roleUI=false
-		  			this.$refs[formName].resetFields();
+		  				this.roleUI=false
+		  				this.$refs[formName].resetFields();
+		  				this.fresh()
 			  		}else{
 						this.$message.error('错了哦');
 			  			return false

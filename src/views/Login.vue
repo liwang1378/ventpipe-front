@@ -45,10 +45,15 @@ import {get,post} from '@/router/axios-cfg'
 							this.logining = false
 							if(res.success){
 								sessionStorage.setItem('user',res.data);
-								this.$router.push({path:'/in'})
+								//根据用户类型跳转 1：平台管理用户 2.：商业管理用户
+		           	 			if(res.data.usertype==1)
+									this.$router.push({path:'/in'})
+								else{
+									this.$router.push({path:'/cs'})
+								}
 							}else{
 								if(res.code==501){
-									this.$alert(res.data.msg,'提示',{confirmButtonText:'关闭'})
+									this.$alert(res.msg,'提示',{confirmButtonText:'关闭'})
 								}else{
 									this.$refs[formName].resetFields();
 									this.$alert('用户名或密码不正确','提示',{confirmButtonText:'关闭'})

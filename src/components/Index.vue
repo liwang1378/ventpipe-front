@@ -167,7 +167,7 @@
       <el-row type="flex" v-if="isWindSelect">
         <el-col :span="12"><div>
           <el-form-item :label="windSystemLabel" :label-width="formLabelWidth" prop="code">
-            <el-select v-model="windForm.code" placeholder="请选择" value-key="id">
+            <el-select v-model="windForm.code" placeholder="请选择" value-key="code">
                 <el-option
                   v-for="(item,index) in windData"
                   :key="item.id"
@@ -462,6 +462,7 @@ export default {
                       message: '操作成功！',
                       type: 'success'
                     });
+                this.query()
               }else{
                 this.$message.error(params.name + ' - 此节点已存在,请重新添加!');
               }

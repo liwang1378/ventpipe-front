@@ -34,6 +34,7 @@ import {get,post} from '@/router/axios-cfg'
 	export default{
 		data(){
 			return {
+				user:{},
 				tableData: [],
 				currentPage:0,
 				total:0,
@@ -41,15 +42,21 @@ import {get,post} from '@/router/axios-cfg'
 			}
 		},
 		created(){
-			this.query(0,10)
+			get('/current').then(res=>{
+			      this.user = res.data
+			      this.query(0,10)
+    		})
+			
 		},
 		methods:{
 			fresh(){
-				this.query(this.currentPage)
+				this.query(this.currentPage,this.size)
 			},
 			query(currentPage,size){
 				this.tableData = []
-				let param = {page: currentPage,size: size}
+				let customerid = this.user.customer.customerid
+				let param = {'page': currentPage,'size': size,'customerid': customerid}
+				
 				post('/command/query',param).then((res)=>{
 					let arr = res.data
 					let array = arr.dataList

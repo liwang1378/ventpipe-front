@@ -288,7 +288,6 @@ import {get,post} from '@/router/axios-cfg'
 			this.query(4)
 		    get('/current').then(res=>{
   				this.user = res.data
-  				console.log(this.user)
 			})
 
 		},
@@ -341,7 +340,6 @@ import {get,post} from '@/router/axios-cfg'
 				param.customerid = this.user.customer.customerid
 				this.$refs[formName].validate((valid)=>{
 			  		if(valid){
-			  			console.log(param)
 						post('/hs/save',JSON.stringify(param)).then((res)=>{
 		  				this.$message({
   				          message: '操作成功！',
