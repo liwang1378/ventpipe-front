@@ -7,12 +7,12 @@
 		<el-card class="box-card" style="margin-top:10px;">
 		  <div slot="header" class="clearfix">
 		    <span>一号楼</span>
-		    <el-button style="padding: 5px " type="primary">关闭</el-button>
+		    <el-button style="padding: 5px " type="primary" @click="closeBuild">关闭</el-button>
 		  </div>
 		  <el-card class="box-card" style="margin-top:10px;">
 		  	<div slot="header" class="clearfix">
 			    <span>一号新风系统</span>
-			    <el-button style="padding: 5px " type="primary">关闭</el-button>
+			    <el-button style="padding: 5px " type="primary" @click="closeWind1">关闭</el-button>
 		  	</div>
 		  	<div>
 		  		<el-row type="flex" class="row-bg">
@@ -39,16 +39,16 @@
 		  		
 		  		<el-row type="flex" class="row-bg">
 		  		  <el-col :span="4"><div class="grid-content bg-purple">
-		  		  	<el-button type="primary">一键升压1</el-button>
+		  		  	<el-button type="primary" @click="send">一键升压1</el-button>
 		  		  </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple-light">
-	  		      	<el-button type="info">关机1</el-button>
+	  		      	<el-button type="info" @click="send">关机1</el-button>
 	  		      </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple">
-	  		      	<el-button type="warning">一键升压2</el-button>
+	  		      	<el-button type="warning" @click="send">一键升压2</el-button>
 	  		      </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple">
-	  		      	<el-button type="danger">关机2</el-button>
+	  		      	<el-button type="danger" @click="send">关机2</el-button>
 	  		      </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple">
 	  		      	<el-button type="success">参数设置</el-button>
@@ -59,7 +59,7 @@
 		   <el-card class="box-card" style="margin-top:10px;background-color:pink">
 		  	<div slot="header" class="clearfix">
 			    <span>101</span>
-			    <el-button style="padding: 5px " type="primary">关闭</el-button>
+			    <el-button style="padding: 5px " type="primary" @click="closeRoom">关闭</el-button>
 		  	</div>
 		  	<div>
 		  		<el-row type="flex" class="row-bg">
@@ -86,16 +86,16 @@
 		  		
 		  		<el-row type="flex" class="row-bg">
 		  		  <el-col :span="4"><div class="grid-content bg-purple">
-		  		  	<el-button type="primary">一键升压1</el-button>
+		  		  	<el-button type="primary" @click="send">一键升压1</el-button>
 		  		  </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple-light">
-	  		      	<el-button type="info">关机1</el-button>
+	  		      	<el-button type="info" @click="send">关机1</el-button>
 	  		      </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple">
-	  		      	<el-button type="warning">一键升压2</el-button>
+	  		      	<el-button type="warning" @click="send">一键升压2</el-button>
 	  		      </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple">
-	  		      	<el-button type="danger">关机2</el-button>
+	  		      	<el-button type="danger" @click="send">关机2</el-button>
 	  		      </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple">
 	  		      	<el-button type="success">参数设置</el-button>
@@ -127,6 +127,18 @@ import {get,post} from '@/router/axios-cfg'
 			})
 		},
 		methods:{
+			closeBuild(){
+				this.$message({message: '恭喜! 楼栋指令发送成功',type: 'success'});
+			},
+			closeWind1(){
+				this.$message({message: '恭喜! 新风系统指令发送成功',type: 'success'});
+			},
+			closeRoom(){
+				this.$message({message: '恭喜! 房间指令发送成功',type: 'success'});
+			},
+			send(){
+				this.$message({message: '恭喜! 命令发送成功',type: 'success'});
+			},
 			handleChange(val) {
 		      }
 		}

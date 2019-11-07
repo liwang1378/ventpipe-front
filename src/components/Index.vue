@@ -580,10 +580,10 @@ export default {
       }
       this.currentNode = data
       let flag = this.$route.path
-      if(flag != url){
+      // if(flag != url){
         //查询参数,path配对的是query
         this.$router.push({ path: url , query:{uuid:data.uuid}})
-      }
+      // }
     }
   },
   created(){
