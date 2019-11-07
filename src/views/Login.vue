@@ -75,12 +75,19 @@ import {get,post} from '@/router/axios-cfg'
 <style scoped>
 	.login-container{
 		width:100%;
-		height: 100%;
+		/*height: 100%;*/
+		background: url('../assets/loginbg.jpg') no-repeat; 
+		background-size:100% 100%;
+		position:fixed;
+		top:50%;
+		left:50%;
+		transform:translateX(-50%) translateY(-50%);
+		min-height:768px;
 	}
 	.login-page{
 		-webkit-border-radius: 5px;
 		border-radius:5px;
-		margin: 180px auto;
+		margin: 250px auto;
 		width: 350px;
 		padding:35px 35px 15px;
 		background: #fff;
