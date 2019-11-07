@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<el-dialog title="参数配置" :visible.sync="modalFlag" width="50%">
+			<ParamModal @childFn="closeModal"/>
+		</el-dialog>
 		<el-breadcrumb separator-class="el-icon-arrow-right" >
 		  <el-breadcrumb-item :to="{ path: '/cs' }">首页</el-breadcrumb-item>
 		  <el-breadcrumb-item v-for="(item,index) in breadcrumb" :key="index">{{item.name}}</el-breadcrumb-item>
@@ -51,7 +54,7 @@
 	  		      	<el-button type="danger" @click="send">关机2</el-button>
 	  		      </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple">
-	  		      	<el-button type="success">参数设置</el-button>
+	  		      	<el-button type="success" @click="modalFlag=true">参数设置</el-button>
 	  		      </div></el-col>
 		  		</el-row>
 		  	</div>
@@ -98,7 +101,7 @@
 	  		      	<el-button type="danger" @click="send">关机2</el-button>
 	  		      </div></el-col>
 	  		      <el-col :span="4"><div class="grid-content bg-purple">
-	  		      	<el-button type="success">参数设置</el-button>
+	  		      	<el-button type="success" @click="modalFlag=true">参数设置</el-button>
 	  		      </div></el-col>
 		  		</el-row>
 		  	</div>
@@ -109,13 +112,18 @@
 
 <script>
 import {get,post} from '@/router/axios-cfg'
+import ParamModal from './modules/Param'
 	export default{
 		data(){
 			return {
+				modalFlag:false,
 				user:{},
 				breadcrumb:[],
 				activeNames: ['1']
 			}
+		},
+		components:{
+			ParamModal
 		},
 		created(){
 			let uuid = this.$route.query.uuid
@@ -127,6 +135,12 @@ import {get,post} from '@/router/axios-cfg'
 			})
 		},
 		methods:{
+			closeModal(e){
+				let type = e==0?'warning':'success'
+				let msg = e==0?'参数配置取消':'参数配置成功'
+				this.$message({message:msg , type: type});
+				this.modalFlag = false
+			},
 			closeBuild(){
 				this.$message({message: '恭喜! 楼栋指令发送成功',type: 'success'});
 			},
